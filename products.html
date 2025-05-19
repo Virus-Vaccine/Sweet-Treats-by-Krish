@@ -5,6 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Sweet Treats by Krish</title>
     <link rel="stylesheet" href="css/sweet-treats-css.css">
+	<script>
+		// Cart functionality
+		document.addEventListener('DOMContentLoaded', function() {
+			let cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const cartNotification = document.createElement('div');
+			cartNotification.className = 'cart-notification';
+			document.body.appendChild(cartNotification);
+
+			// Update cart count on page load
+			updateCartCount();
+
+			// Add to Cart buttons - updated selector
+			document.querySelectorAll('.product-info .btn').forEach(button => {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+					const productCard = this.closest('.product-card');
+					const productName = productCard.querySelector('.product-title').textContent;
+					const productPrice = productCard.querySelector('.product-price').textContent;
+					const productImg = productCard.querySelector('.product-img').src;
+
+					// Show modal for special requests
+					showRequestModal(productName, productPrice, productImg);
+				});
+			});
+
+			// Show modal for special requests
+			function showRequestModal(name, price, img) {
+				const modal = document.createElement('div');
+				modal.className = 'cart-modal';
+				modal.innerHTML = `
+					<div class="modal-content">
+						<span class="close-modal">&times;</span>
+						<h3>Add Special Request (Optional)</h3>
+						<p>Adding ${name} to your cart</p>
+						<div class="product-preview">
+							<img src="${img}" alt="${name}" style="max-width: 100px; border-radius: 5px;">
+							<div>
+								<h4>${name}</h4>
+								<p>${price}</p>
+							</div>
+						</div>
+						<textarea class="special-request" placeholder="Any special instructions or requests for this item..." rows="3"></textarea>
+						<button class="btn confirm-add">Add to Cart</button>
+					</div>
+				`;
+				document.body.appendChild(modal);
+
+				// Close modal
+				modal.querySelector('.close-modal').addEventListener('click', () => {
+					document.body.removeChild(modal);
+				});
+
+				// Confirm add to cart
+				modal.querySelector('.confirm-add').addEventListener('click', () => {
+					const specialRequest = modal.querySelector('.special-request').value;
+					addToCart(name, price, img, specialRequest);
+					document.body.removeChild(modal);
+					showCartNotification();
+				});
+			}
+
+			// Add item to cart
+			function addToCart(name, price, img, request = '') {
+				cart.push({
+					name: name,
+					price: price,
+					img: img,
+					request: request
+				});
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartCount();
+			}
+
+			// Update cart count display
+			function updateCartCount() {
+				const cartCount = document.querySelector('.cart-count');
+				if (cartCount) {
+					cartCount.textContent = cart.length;
+				} else {
+					// Create cart count if it doesn't exist
+					const nav = document.querySelector('nav');
+					const cartLink = document.createElement('a');
+					cartLink.href = 'cart.html'; // You'll need to create this page
+					cartLink.className = 'cart-link';
+					cartLink.innerHTML = `Cart (<span class="cart-count">${cart.length}</span>)`;
+					nav.querySelector('ul').appendChild(cartLink);
+				}
+			}
+
+			// Show notification
+			function showCartNotification() {
+				cartNotification.textContent = 'Item added to cart!';
+				cartNotification.style.display = 'block';
+				setTimeout(() => {
+					cartNotification.style.display = 'none';
+				}, 2000);
+			}
+		});
+	</script>
 </head>
 <body>
     <header class="main-header">
@@ -98,7 +197,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="img/cookies.png" alt="Cookies" class="product-img">
+                    <img src="img/choco-chip.png" alt="Cookies" class="product-img">
                     <div class="product-info">
                         <h3 class="product-title">Chocolate Chip Cookies</h3>
                         <p class="product-price">₱140-280</p>
@@ -123,7 +222,7 @@
             <h2 class="section-title">Available Products</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <img src="img/cookies.png" alt="Cookies" class="product-img">
+                    <img src="img/choco-chip.png" alt="Cookies" class="product-img">
                     <div class="product-info">
                         <h3 class="product-title">Chocolate Chip Cookies</h3>
                         <p class="product-price">₱140-280</p>

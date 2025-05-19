@@ -512,6 +512,83 @@ textarea.form-control {
     color: white;
 }
 
+/* Cart Modal Styles */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.product-preview {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 15px 0;
+}
+
+#special-request {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+/* Cart Notification */
+.cart-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #8b0000;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Cart Link in Nav */
+.cart-link {
+    text-decoration: none;
+    color: #8b0000;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+.cart-link:hover {
+    color: #ff6b6b;
+    background-color: #fff5f5;
+}
+
 @media (max-width: 12px) {
     .container {
         width: 95%;
