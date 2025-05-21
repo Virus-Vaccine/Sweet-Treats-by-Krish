@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Products - Sweet Treats by Krish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
+    <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -19,6 +21,10 @@
                     <li><a href="contact.html">Contacts</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="login.html">Login / Sign Up</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="cart-count">0</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -33,87 +39,41 @@
         <div class="subcategory-nav">
             <a href="#all" class="subcategory-link active">All Products</a>
             <a href="#pastry" class="subcategory-link">Pastry</a>
-            <a href="#bakery" class="subcategory-link">Bakery</a>
             <a href="#confectionery" class="subcategory-link">Confectionery</a>
         </div>
 
         <section id="all">
             <h2 class="section-title">All Available Products</h2>
             <div class="product-grid">
-                <!-- Pastry Products -->
                 <div class="product-card">
-                    <img src="prod.png" alt="Whole Wheat Loaf" class="product-img">
+                    <img src="img/banana-cake.png" alt="Banana Cake" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Whole Wheat Loaf</h3>
-                        <p class="product-price">$4.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <h3 class="product-title">Banana Cake</h3>
+                        <p class="product-price">₱220-₱250</p>
+                        <a href="banana-cake.png" class="btn">Add to Cart</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="prod.png" alt="Butter Croissant" class="product-img">
+                    <img src="img/garlic-bread.png" alt="Garlic Bread" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Butter Croissant</h3>
-                        <p class="product-price">$3.49</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
+                        <h3 class="product-title">Korean Cream Cheese Garlic Bread</h3>
+                        <p class="product-price">₱300</p>
+                        <a href="ensaymada.html" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card" data-id="cookies">
+                    <img src="img/choco-chip.png" alt="Cookies" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Chocolate Chip Cookies</h3>
+                        <p class="product-price">₱140-280</p>
                         <a href="#" class="btn">Add to Cart</a>
                     </div>
                 </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Cheese Bun" class="product-img">
+                <div class="product-card" data-id="revel-bars">
+                    <img src="img/revel-bars.png" alt="Revel Bars" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Cheese Bun</h3>
-                        <p class="product-price">$3.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                
-                <!-- Bakery Products -->
-                <div class="product-card">
-                    <img src="prod.png" alt="Chocolate Cake" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Chocolate Cake</h3>
-                        <p class="product-price">$24.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Traditional Pudding" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Traditional Pudding</h3>
-                        <p class="product-price">$12.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                
-                <!-- Confectionery Products -->
-                <div class="product-card">
-                    <img src="prod.png" alt="Dark Chocolate" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Dark Chocolate</h3>
-                        <p class="product-price">$8.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Milk Chocolate" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Milk Chocolate</h3>
-                        <p class="product-price">$7.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Chocolate Fudge" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Chocolate Fudge</h3>
-                        <p class="product-price">$12.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
+                        <h3 class="product-title">Revel Bars</h3>
+                        <p class="product-price">₱300</p>
                         <a href="#" class="btn">Add to Cart</a>
                     </div>
                 </div>
@@ -124,63 +84,19 @@
             <h2 class="section-title">Available Pastry Products</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <img src="prod.png" alt="Whole Wheat Loaf" class="product-img">
+                    <img src="img/banana-cake.png" alt="Banana Cake" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Whole Wheat Loaf</h3>
-                        <p class="product-price">$4.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <h3 class="product-title">Banana Cake</h3>
+                        <p class="product-price">₱220-₱250</p>
+                        <a href="banana-cake.png" class="btn">Add to Cart</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="prod.png" alt="Butter Croissant" class="product-img">
+                    <img src="img/garlic-bread.png" alt="Garlic Bread" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Butter Croissant</h3>
-                        <p class="product-price">$3.49</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Cheese Bun" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Cheese Bun</h3>
-                        <p class="product-price">$3.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Cinnamon Rolls" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Cinnamon Rolls</h3>
-                        <p class="product-price">$3.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="bakery">
-            <h2 class="section-title">Available Bakery Products</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="prod.png" alt="Chocolate Cake" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Chocolate Cake</h3>
-                        <p class="product-price">$24.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Traditional Pudding" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Traditional Pudding</h3>
-                        <p class="product-price">$12.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <h3 class="product-title">Korean Cream Cheese Garlic Bread</h3>
+                        <p class="product-price">₱300</p>
+                        <a href="ensaymada.html" class="btn">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -189,30 +105,19 @@
         <section id="confectionery">
             <h2 class="section-title">Available Confectionery Products</h2>
             <div class="product-grid">
-                <div class="product-card">
-                    <img src="prod.png" alt="Dark Chocolate" class="product-img">
+                <div class="product-card" data-id="cookies">
+                    <img src="img/choco-chip.png" alt="Cookies" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Dark Chocolate</h3>
-                        <p class="product-price">$8.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
+                        <h3 class="product-title">Chocolate Chip Cookies</h3>
+                        <p class="product-price">₱140-280</p>
                         <a href="#" class="btn">Add to Cart</a>
                     </div>
                 </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Milk Chocolate" class="product-img">
+                <div class="product-card" data-id="revel-bars">
+                    <img src="img/revel-bars.png" alt="Revel Bars" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Milk Chocolate</h3>
-                        <p class="product-price">$7.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="prod.png" alt="Chocolate Fudge" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-title">Chocolate Fudge</h3>
-                        <p class="product-price">$12.99</p>
-                        <p><span style="color: #2e8b57; font-weight: bold;">✓ In Stock</span></p>
+                        <h3 class="product-title">Revel Bars</h3>
+                        <p class="product-price">₱300</p>
                         <a href="#" class="btn">Add to Cart</a>
                     </div>
                 </div>
@@ -235,14 +140,8 @@
                     <div class="form-group">
                         <label for="product-interest">Products You're Interested In</label>
                         <select id="product-interest" name="product-interest" class="form-control" multiple required>
-                            <option value="wheat-bread">Wheat Bread</option>
-                            <option value="sweet-pastry">Sweet Pastry</option>
-                            <option value="flaky-bread">Flaky Bread</option>
-                            <option value="filled-bread">Filled Bread</option>
-                            <option value="chocolate-cake">Chocolate Cake</option>
-                            <option value="vanilla-cake">Vanilla Cake</option>
-                            <option value="dark-chocolate">Dark Chocolate</option>
-                            <option value="milk-chocolate">Milk Chocolate</option>
+                            <option value="wheat-bread">Pastry</option>
+                            <option value="sweet-pastry">Confectionery</option>
                         </select>
                         <small style="display: block; margin-top: 5px; color: #666;">Hold Ctrl (or Cmd on Mac) to select multiple options</small>
                     </div>
@@ -274,5 +173,21 @@
             </div>
         </div>
     </footer>
+	
+	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">
+	  <div class="cart-popup">
+		<button class="close-cart" id="closeCartPopup">&times;</button>
+		<h3>Your Cart</h3>
+		<ul id="popupCartItems"></ul>
+		<div class="cart-popup-total">
+		  Total: ₱<span id="popupCartTotal">0.00</span>
+		</div>
+		<div class="cart-popup-notes">
+		  <label for="cartNotes">Personal Notes:</label>
+		  <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
+		</div>
+		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
+	  </div>
+	</div>
 </body>
 </html>

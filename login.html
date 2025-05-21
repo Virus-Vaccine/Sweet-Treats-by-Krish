@@ -4,84 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login / Sign Up - Sweet Treats by Krish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
-    <style>
-        .auth-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-        }
-        
-        .auth-form h3 {
-            margin-bottom: 20px;
-            color: #8b0000;
-        }
-        
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-        
-        .forgot-password a {
-            color: #8b0000;
-            text-decoration: none;
-        }
-        
-        .social-login {
-            margin-top: 30px;
-            text-align: center;
-        }
-        
-        .social-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 25px;
-            margin: 0 10px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .terms {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .help-section {
-            margin-top: 50px;
-        }
-
-        .help-item {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .help-question {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #8b0000;
-            cursor: pointer;
-        }
-
-        .help-answer {
-            display: none;
-            padding: 10px 0;
-        }
-
-        .help-answer.active {
-            display: block;
-        }
-    </style>
+    <script src="js/app.js" defer></script><script src="js/cart.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -96,82 +21,92 @@
                     <li><a href="contact.html">Contacts</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="login.html">Login / Sign Up</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="cart-count">0</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <div class="page-banner">
-            <h1>Account Access</h1>
-            <p>Login or create a new account to manage your orders and receive exclusive offers</p>
-        </div>
-
+    <main class="container" style="padding: 40px 0;">
+        <div id="authAlerts"></div>
         <div class="auth-container">
             <div class="auth-tabs">
                 <div class="auth-tab active" data-tab="login">Login</div>
-                <div class="auth-tab" data-tab="register">Sign Up</div>
+                <div class="auth-tab" data-tab="register">Register</div>
             </div>
 
-            <div class="form-container">
-                <form class="auth-form active" id="login-form">
-                    <h3>Welcome Back!</h3>
-                    <div class="form-group">
-                        <label for="login-email">Email Address</label>
-                        <input type="email" id="login-email" name="email" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" name="password" class="form-control" placeholder="Enter your password" required>
-                    </div>
+            <form id="loginForm" class="auth-form active">
+                <h3>Welcome Back!</h3>
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
                     <div class="forgot-password">
-                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                        <a href="#" id="forgotPasswordLink">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="btn">Login</button>
-                </form>
+                </div>
+                
+                <button type="submit" class="btn-auth">Login</button>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="#" class="switch-tab" data-tab="register">Sign up</a>
+                </div>
+            </form>
+            
+            <form id="registerForm" class="auth-form">
+                <h3>Create a New Account</h3>
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Create a password" minlength="6" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirm your password" minlength="6" required>
+                </div>
+                
+                <button type="submit" class="btn-auth">Create Account</button>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="#" class="switch-tab" data-tab="login">Login</a>
+                </div>
+                
+                <div class="terms">
+                    By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                </div>
+            </form>
+        </div>
 
-                <!-- Register Form -->
-                <form class="auth-form" id="register-form">
-                    <h3>Create a New Account</h3>
-                    <div class="form-group">
-                        <label for="reg-name">Full Name</label>
-                        <input type="text" id="reg-name" name="name" class="form-control" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-email">Email Address</label>
-                        <input type="email" id="reg-email" name="email" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-phone">Phone Number</label>
-                        <input type="tel" id="reg-phone" name="phone" class="form-control" placeholder="Enter your phone number">
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-password">Password</label>
-                        <input type="password" id="reg-password" name="password" class="form-control" placeholder="Create a password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-confirm-password">Confirm Password</label>
-                        <input type="password" id="reg-confirm-password" name="confirm-password" class="form-control" placeholder="Confirm your password" required>
-                    </div>
-                    <button type="submit" class="btn">Create Account</button>
-
-                    <div class="terms">
-                        By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-                    </div>
-                </form>
-
-                <!-- Forgot Password Form -->
-                <form class="auth-form" id="forgot-form">
-                    <h3>Reset Your Password</h3>
+        <div id="forgotPasswordModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Reset Your Password</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="forgotForm">
                     <p>Enter your email address below and we'll send you a link to reset your password.</p>
                     <div class="form-group">
-                        <label for="forgot-email">Email Address</label>
-                        <input type="email" id="forgot-email" name="email" class="form-control" placeholder="Enter your email" required>
+                        <label for="forgotEmail">Email Address</label>
+                        <input type="email" id="forgotEmail" class="form-control" placeholder="Enter your email" required>
                     </div>
-                    <button type="submit" class="btn">Send Reset Link</button>
-                    <div class="form-group" style="text-align: center; margin-top: 20px;">
-                        <a href="#" id="back-to-login">Back to Login</a>
-                    </div>
+                    <button type="submit" class="btn-auth">Send Reset Link</button>
                 </form>
             </div>
         </div>
@@ -211,7 +146,7 @@
             </div>
         </section>
     </main>
-
+    
     <footer>
         <div class="container">
             <div class="footer-container">
@@ -234,5 +169,21 @@
             </div>
         </div>
     </footer>
+	
+	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">
+	  <div class="cart-popup">
+		<button class="close-cart" id="closeCartPopup">&times;</button>
+		<h3>Your Cart</h3>
+		<ul id="popupCartItems"></ul>
+		<div class="cart-popup-total">
+		  Total: ₱<span id="popupCartTotal">0.00</span>
+		</div>
+		<div class="cart-popup-notes">
+		  <label for="cartNotes">Personal Notes:</label>
+		  <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
+		</div>
+		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
+	  </div>
+	</div>
 </body>
 </html>

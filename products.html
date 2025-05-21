@@ -4,106 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Sweet Treats by Krish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
-	<script>
-		// Cart functionality
-		document.addEventListener('DOMContentLoaded', function() {
-			let cart = JSON.parse(localStorage.getItem('cart')) || [];
-			const cartNotification = document.createElement('div');
-			cartNotification.className = 'cart-notification';
-			document.body.appendChild(cartNotification);
-
-			// Update cart count on page load
-			updateCartCount();
-
-			// Add to Cart buttons - updated selector
-			document.querySelectorAll('.product-info .btn').forEach(button => {
-				button.addEventListener('click', function(e) {
-					e.preventDefault();
-					const productCard = this.closest('.product-card');
-					const productName = productCard.querySelector('.product-title').textContent;
-					const productPrice = productCard.querySelector('.product-price').textContent;
-					const productImg = productCard.querySelector('.product-img').src;
-
-					// Show modal for special requests
-					showRequestModal(productName, productPrice, productImg);
-				});
-			});
-
-			// Show modal for special requests
-			function showRequestModal(name, price, img) {
-				const modal = document.createElement('div');
-				modal.className = 'cart-modal';
-				modal.innerHTML = `
-					<div class="modal-content">
-						<span class="close-modal">&times;</span>
-						<h3>Add Special Request (Optional)</h3>
-						<p>Adding ${name} to your cart</p>
-						<div class="product-preview">
-							<img src="${img}" alt="${name}" style="max-width: 100px; border-radius: 5px;">
-							<div>
-								<h4>${name}</h4>
-								<p>${price}</p>
-							</div>
-						</div>
-						<textarea class="special-request" placeholder="Any special instructions or requests for this item..." rows="3"></textarea>
-						<button class="btn confirm-add">Add to Cart</button>
-					</div>
-				`;
-				document.body.appendChild(modal);
-
-				// Close modal
-				modal.querySelector('.close-modal').addEventListener('click', () => {
-					document.body.removeChild(modal);
-				});
-
-				// Confirm add to cart
-				modal.querySelector('.confirm-add').addEventListener('click', () => {
-					const specialRequest = modal.querySelector('.special-request').value;
-					addToCart(name, price, img, specialRequest);
-					document.body.removeChild(modal);
-					showCartNotification();
-				});
-			}
-
-			// Add item to cart
-			function addToCart(name, price, img, request = '') {
-				cart.push({
-					name: name,
-					price: price,
-					img: img,
-					request: request
-				});
-				localStorage.setItem('cart', JSON.stringify(cart));
-				updateCartCount();
-			}
-
-			// Update cart count display
-			function updateCartCount() {
-				const cartCount = document.querySelector('.cart-count');
-				if (cartCount) {
-					cartCount.textContent = cart.length;
-				} else {
-					// Create cart count if it doesn't exist
-					const nav = document.querySelector('nav');
-					const cartLink = document.createElement('a');
-					cartLink.href = 'cart.html'; // You'll need to create this page
-					cartLink.className = 'cart-link';
-					cartLink.innerHTML = `Cart (<span class="cart-count">${cart.length}</span>)`;
-					nav.querySelector('ul').appendChild(cartLink);
-				}
-			}
-
-			// Show notification
-			function showCartNotification() {
-				cartNotification.textContent = 'Item added to cart!';
-				cartNotification.style.display = 'block';
-				setTimeout(() => {
-					cartNotification.style.display = 'none';
-				}, 2000);
-			}
-		});
-	</script>
+    <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -118,6 +21,10 @@
                     <li><a href="contact.html">Contacts</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="login.html">Login / Sign Up</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="cart-count">0</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -144,7 +51,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Banana Cake</h3>
                         <p class="product-price">₱220-₱250</p>
-                        <a href="banana-cake.png" class="btn">Add to Cart</a>
+                        <a href="banana-cake.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -152,15 +59,15 @@
                     <div class="product-info">
                         <h3 class="product-title">Bread Roll</h3>
                         <p class="product-price">₱240-₱260</p>
-                        <a href="banana-cake.png" class="btn">Add to Cart</a>
+                        <a href="bread-roll.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-info">
                     <img src="img/cinnamon-roll.png" alt="Cinnamon Roll" class="product-img">
+                    <div class="product-info">
                         <h3 class="product-title">Cinnamon Rolls w/ Walnuts</h3>
                         <p class="product-price">₱400</p>
-                        <a href="cinnamon-roll.html" class="btn">Add to Cart</a>
+                        <a href="cinnamon-roll.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -168,7 +75,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Premium Ensaymada</h3>
                         <p class="product-price">₱220</p>
-                        <a href="ensaymada.html" class="btn">Add to Cart</a>
+                        <a href="ensaymada.html" class="btn">View Product</a>
                     </div>
                 </div>
             </div>
@@ -185,7 +92,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Brigadeiro Cake</h3>
                         <p class="product-price">₱160</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="brigadeiro.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -193,7 +100,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Brownies</h3>
                         <p class="product-price">₱200</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="brownies.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -201,7 +108,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Chocolate Chip Cookies</h3>
                         <p class="product-price">₱140-280</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="cookies.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -209,7 +116,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Revel Bars</h3>
                         <p class="product-price">₱300</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="revel-bars.html" class="btn">View Product</a>
                     </div>
                 </div>
             </div>
@@ -226,7 +133,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Chocolate Chip Cookies</h3>
                         <p class="product-price">₱140-280</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="#" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -234,7 +141,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Brigadeiro Cake</h3>
                         <p class="product-price">₱160</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="#" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -242,7 +149,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Brownies</h3>
                         <p class="product-price">₱200</p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="#" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -250,7 +157,7 @@
                     <div class="product-info">
                         <h3 class="product-title">Premium Ensaymada</h3>
                         <p class="product-price">₱220</p>
-                        <a href="ensaymada.html" class="btn">Add to Cart</a>
+                        <a href="ensaymada.html" class="btn">View Product</a>
                     </div>
                 </div>
             </div>
@@ -318,5 +225,21 @@
             </div>
         </div>
     </footer>
+	
+	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">
+	  <div class="cart-popup">
+		<button class="close-cart" id="closeCartPopup">&times;</button>
+		<h3>Your Cart</h3>
+		<ul id="popupCartItems"></ul>
+		<div class="cart-popup-total">
+		  Total: ₱<span id="popupCartTotal">0.00</span>
+		</div>
+		<div class="cart-popup-notes">
+		  <label for="cartNotes">Personal Notes:</label>
+		  <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
+		</div>
+		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
+	  </div>
+	</div>
 </body>
 </html>

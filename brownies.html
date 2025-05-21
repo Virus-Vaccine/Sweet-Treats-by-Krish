@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinnamon Rolls - Sweet Treats by Krish</title>
+    <title>Brownies - Sweet Treats by Krish</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
     <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
@@ -32,49 +32,49 @@
 
     <main class="container">
         <div class="breadcrumb" style="margin: 20px 0;">
-            <a href="sweet-treats-website.html">Home</a> > <a href="products.html">Products</a> > <a href="pastry.html">Pastry</a> > Cinnamon Rolls
+            <a href="sweet-treats-website.html">Home</a> > <a href="products.html">Products</a> > <a href="confectionery.html">Confectionery</a> > Brownies
         </div>
 
         <div class="product-detail-container">
             <div class="product-image-container">
-                <img src="img/cinnamon-roll.png" alt="Cinnamon Rolls" class="product-main-image" id="mainImage">
+                <img src="img/brownies.png" alt="Brownies" class="product-main-image" id="mainImage">
                 <div class="product-thumbnails">
-                    <img src="img/cinnamon-roll.png" alt="Cinnamon Rolls - Image 1" class="product-thumbnail active" onclick="changeImage(this, 'img/cinnamon-roll.png')">
-                    <img src="img/cinnamon-roll-alt1.jpg" alt="Cinnamon Rolls - Image 2" class="product-thumbnail" onclick="changeImage(this, 'img/cinnamon-roll-alt1.jpg')">
-                    <img src="img/cinnamon-roll-alt2.jpg" alt="Cinnamon Rolls - Image 3" class="product-thumbnail" onclick="changeImage(this, 'img/cinnamon-roll-alt2.jpg')">
+                    <img src="img/brownies.png" alt="Brownies - Image 1" class="product-thumbnail active" onclick="changeImage(this, 'img/brownies.png')">
+                    <img src="img/brownies-alt1.jpg" alt="Brownies - Image 2" class="product-thumbnail" onclick="changeImage(this, 'img/brownies-alt1.jpg')">
+                    <img src="img/brownies-alt2.jpg" alt="Brownies - Image 3" class="product-thumbnail" onclick="changeImage(this, 'img/brownies-alt2.jpg')">
                 </div>
             </div>
             
             <div class="product-info-container">
-                <h1 class="product-title">Cinnamon Rolls with Walnuts</h1>
-                <div class="product-price">₱400</div>
+                <h1 class="product-title">Brownies</h1>
+                <div class="product-price">₱200</div>
                 <div class="product-rating" style="margin-bottom: 20px;">
-                    ★★★★★ <span style="color: #666; margin-left: 10px;">(42 reviews)</span>
+                    ★★★★★ <span style="color: #666; margin-left: 10px;">(47 reviews)</span>
                 </div>
                 <p class="product-description">
-                    Our famous Cinnamon Rolls are made with a rich, buttery dough, filled with cinnamon sugar and crunchy walnuts, then topped with cream cheese icing. These indulgent treats are perfect for breakfast, brunch, or dessert.
+                    Our fudgy, decadent Brownies are made with premium dark chocolate and real butter for an intense chocolate experience. Each bite delivers a perfect balance of rich chocolate flavor with a slightly crisp top and dense, fudgy center.
                 </p>
                 
                 <div class="product-meta">
                     <div class="meta-item">
                         <span class="meta-label">Category:</span>
-                        <span>Pastry</span>
+                        <span>Confectionery</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Size:</span>
-                        <span>6 large rolls per pan</span>
+                        <span>8x8-inch pan (9 large brownies)</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Ingredients:</span>
-                        <span>Flour, butter, milk, sugar, cinnamon, walnuts, cream cheese, vanilla</span>
+                        <span>Dark chocolate, butter, sugar, eggs, flour, cocoa powder, vanilla</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Allergens:</span>
-                        <span>Contains gluten, dairy, eggs, tree nuts</span>
+                        <span>Contains gluten, dairy, eggs</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Shelf Life:</span>
-                        <span>2 days at room temperature, 5 days refrigerated</span>
+                        <span>5 days at room temperature, 2 weeks refrigerated</span>
                     </div>
                 </div>
                 
@@ -86,12 +86,12 @@
                     </div>
                     
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label for="icing-amount">Icing Amount:</label>
-                        <select id="icing-amount" class="form-control">
-                            <option value="normal">Normal</option>
-                            <option value="extra">Extra</option>
-                            <option value="light">Light</option>
-                            <option value="none">None</option>
+                        <label for="add-ins">Add-Ins (Optional):</label>
+                        <select id="add-ins" class="form-control">
+                            <option value="none">None (Classic)</option>
+                            <option value="walnuts">Walnuts</option>
+                            <option value="peanuts">Peanuts</option>
+                            <option value="marshmallow">Marshmallow Swirl</option>
                         </select>
                     </div>
                     
@@ -106,21 +106,23 @@
         <div class="product-tabs">
             <div class="tab-buttons">
                 <button class="tab-btn active" onclick="openTab('description')">Description</button>
-                <button class="tab-btn" onclick="openTab('heating')">Heating Instructions</button>
+                <button class="tab-btn" onclick="openTab('serving')">Serving Suggestions</button>
             </div>
             
             <div id="description" class="tab-content active">
                 <h3>Product Details</h3>
-                <p>Our Cinnamon Rolls are made with a special brioche-style dough that's rich and tender. The filling features premium cinnamon and brown sugar, plus crunchy walnuts for texture contrast. Each roll is generously topped with our signature cream cheese icing that perfectly balances the sweetness.</p>
-                <p>Available with or without walnuts upon request. For special occasions, we can add raisins or other dried fruits to the filling. These rolls freeze well - simply thaw and warm before serving.</p>
+                <p>Our brownies are made with a special blend of high-quality dark chocolate and cocoa powder for maximum chocolate flavor. The recipe has been perfected to achieve the ideal fudgy texture - dense and moist without being underbaked. The top develops a shiny, crackly crust that contrasts beautifully with the rich interior.</p>
+                <p>Available plain or with optional add-ins. For a special treat, try warming a brownie for 10 seconds in the microwave and serving with vanilla ice cream.</p>
             </div>
             
-            <div id="heating" class="tab-content">
-                <h3>Heating Instructions</h3>
+            <div id="serving" class="tab-content">
+                <h3>Serving Suggestions</h3>
                 <ul>
-                    <li><strong>Oven:</strong> Preheat to 350°F. Place rolls on baking sheet and cover loosely with foil. Heat for 10-12 minutes until warm throughout.</li>
-                    <li><strong>Microwave:</strong> Place roll on microwave-safe plate. Heat for 15-20 seconds. Be careful not to overheat as icing may melt.</li>
-                    <li><strong>From Frozen:</strong> Thaw overnight in refrigerator. Warm as above or microwave for 30-45 seconds.</li>
+                    <li>Serve warm with vanilla ice cream and chocolate sauce</li>
+                    <li>Cut into small squares for a dessert platter</li>
+                    <li>Crumble over yogurt or oatmeal for breakfast</li>
+                    <li>Use as a base for brownie sundaes with your favorite toppings</li>
+                    <li>Pair with coffee or milk for an afternoon treat</li>
                 </ul>
             </div>
         </div>
@@ -232,13 +234,13 @@
         }
         
         function addToCart() {
-            const icingAmount = document.getElementById('icing-amount').value;
+            const addIns = document.getElementById('add-ins').value;
             const product = {
-                name: 'Cinnamon Rolls with Walnuts',
-                price: 400,
+                name: 'Brownies' + (addIns !== 'none' ? ` with ${addIns}` : ''),
+                price: 200,
                 quantity: parseInt(document.getElementById('quantity').value),
-                icing: icingAmount,
-                image: 'img/cinnamon-roll.png'
+                addIns: addIns,
+                image: 'img/brownies.png'
             };
             
             let cart = JSON.parse(localStorage.getItem('cart')) || [];

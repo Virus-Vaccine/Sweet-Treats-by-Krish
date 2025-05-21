@@ -3,192 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flaky Bread - Sweet Treats by Krish</title>
+    <title>Korean Cream Cheese Garlic Bread - Sweet Treats by Krish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
-    <style>
-        .product-detail-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 50px 0;
-        }
-        
-        .product-image-container {
-            position: relative;
-        }
-        
-        .product-main-image {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .product-thumbnails {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .product-thumbnail {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .product-thumbnail:hover, .product-thumbnail.active {
-            border-color: #8b0000;
-        }
-        
-        .product-info-container {
-            padding: 20px;
-        }
-        
-        .product-title {
-            font-size: 32px;
-            color: #8b0000;
-            margin-bottom: 10px;
-        }
-        
-        .product-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #8b0000;
-            margin-bottom: 20px;
-        }
-        
-        .product-description {
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        
-        .product-meta {
-            margin-bottom: 30px;
-        }
-        
-        .meta-item {
-            display: flex;
-            margin-bottom: 10px;
-        }
-        
-        .meta-label {
-            font-weight: bold;
-            min-width: 120px;
-            color: #8b0000;
-        }
-        
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .quantity-btn {
-            width: 40px;
-            height: 40px;
-            background-color: #f5f5f5;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-        }
-        
-        .quantity-input {
-            width: 60px;
-            height: 40px;
-            text-align: center;
-            margin: 0 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .add-to-cart-btn {
-            background-color: #8b0000;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .add-to-cart-btn:hover {
-            background-color: #a52a2a;
-            transform: translateY(-2px);
-        }
-        
-        .product-tabs {
-            margin: 50px 0;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-        
-        .tab-btn {
-            padding: 15px 25px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: #666;
-            position: relative;
-        }
-        
-        .tab-btn.active {
-            color: #8b0000;
-        }
-        
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #8b0000;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .related-products {
-            margin: 50px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .product-detail-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-title {
-                font-size: 28px;
-            }
-        }
-    </style>
+    <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -196,13 +14,17 @@
             <div class="logo">Sweet Treats <span>by Krish</span></div>
             <nav>
                 <ul class="nav-list">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sweet-treats-website.html">Home</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="faq.html">FAQs</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contacts</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="login.html">Login / Sign Up</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="cart-count">0</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -210,30 +32,28 @@
 
     <main class="container">
         <div class="breadcrumb" style="margin: 20px 0;">
-            <a href="index.html">Home</a> > <a href="products.html">Products</a> > <a href="pastry.html">Pastry</a> > Flaky Bread
+            <a href="sweet-treats-website.html">Home</a> > <a href="products.html">Products</a> > <a href="pastry.html">Pastry</a> > Korean Cream Cheese Garlic Bread
         </div>
 
         <div class="product-detail-container">
             <div class="product-image-container">
-                <img src="/api/placeholder/800/600" alt="Flaky Bread" class="product-main-image" id="mainImage">
+                <img src="img/korean-garlic-bread.jpg" alt="Korean Cream Cheese Garlic Bread" class="product-main-image" id="mainImage">
                 <div class="product-thumbnails">
-                    <img src="/api/placeholder/300/300" alt="Flaky Bread - Image 1" class="product-thumbnail active" onclick="changeImage(this, '/api/placeholder/800/600')">
-                    <img src="/api/placeholder/300/300" alt="Flaky Bread - Image 2" class="product-thumbnail" onclick="changeImage(this, '/api/placeholder/800/600?2')">
-                    <img src="/api/placeholder/300/300" alt="Flaky Bread - Image 3" class="product-thumbnail" onclick="changeImage(this, '/api/placeholder/800/600?3')">
-                    <img src="/api/placeholder/300/300" alt="Flaky Bread - Image 4" class="product-thumbnail" onclick="changeImage(this, '/api/placeholder/800/600?4')">
+                    <img src="img/korean-garlic-bread.jpg" alt="Korean Garlic Bread - Image 1" class="product-thumbnail active" onclick="changeImage(this, 'img/korean-garlic-bread.jpg')">
+                    <img src="img/korean-garlic-bread-alt1.jpg" alt="Korean Garlic Bread - Image 2" class="product-thumbnail" onclick="changeImage(this, 'img/korean-garlic-bread-alt1.jpg')">
+                    <img src="img/korean-garlic-bread-alt2.jpg" alt="Korean Garlic Bread - Image 3" class="product-thumbnail" onclick="changeImage(this, 'img/korean-garlic-bread-alt2.jpg')">
+                    <img src="img/korean-garlic-bread-alt3.jpg" alt="Korean Garlic Bread - Image 4" class="product-thumbnail" onclick="changeImage(this, 'img/korean-garlic-bread-alt3.jpg')">
                 </div>
             </div>
             
             <div class="product-info-container">
-                <h1 class="product-title">Flaky Bread</h1>
-                <div class="product-price">$5.49</div>
+                <h1 class="product-title">Korean Cream Cheese Garlic Bread</h1>
+                <div class="product-price">₱300 (4pcs)</div>
                 <div class="product-rating" style="margin-bottom: 20px;">
-                    ★★★★★ <span style="color: #666; margin-left: 10px;">(24 reviews)</span>
+                    ★★★★★ <span style="color: #666; margin-left: 10px;">(72 reviews)</span>
                 </div>
                 <p class="product-description">
-                    Our signature Flaky Bread is a masterpiece of layered dough, baked to golden perfection. 
-                    Each bite reveals delicate, buttery layers that melt in your mouth. Made with premium 
-                    European butter and slow-fermented dough for exceptional flavor and texture.
+                    Experience the viral Korean sensation! Our Cream Cheese Garlic Bread features soft milk bread stuffed with sweet cream cheese filling, dipped in garlic butter sauce, and baked to golden perfection. The perfect combination of sweet, savory, and garlicky flavors in every bite.
                 </p>
                 
                 <div class="product-meta">
@@ -242,20 +62,24 @@
                         <span>Pastry</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Weight:</span>
-                        <span>400g</span>
+                        <span class="meta-label">Quantity:</span>
+                        <span>4 pieces per box</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Ingredients:</span>
-                        <span>Wheat flour, butter, water, salt, yeast</span>
+                        <span>Milk bread, cream cheese, garlic, butter, condensed milk, whipping cream, parsley, sugar, salt</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Allergens:</span>
-                        <span>Contains gluten, dairy</span>
+                        <span>Contains gluten, dairy, eggs</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Shelf Life:</span>
-                        <span>2 days at room temperature, 5 days refrigerated</span>
+                        <span>Best consumed same day, 2 days refrigerated</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Weight:</span>
+                        <span>Approx. 80g per piece</span>
                     </div>
                 </div>
                 
@@ -264,6 +88,25 @@
                         <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
                         <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
                         <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="garlic-level">Garlic Intensity:</label>
+                        <select id="garlic-level" class="form-control">
+                            <option value="normal">Normal</option>
+                            <option value="extra">Extra Garlic (+₱20)</option>
+                            <option value="light">Light Garlic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="spice-level">Spice Level:</label>
+                        <select id="spice-level" class="form-control">
+                            <option value="none">No Spice</option>
+                            <option value="mild">Mild</option>
+                            <option value="medium">Medium (+₱15)</option>
+                            <option value="spicy">Spicy (+₱30)</option>
+                        </select>
                     </div>
                     
                     <button type="button" class="add-to-cart-btn" onclick="addToCart()">
@@ -277,12 +120,32 @@
         <div class="product-tabs">
             <div class="tab-buttons">
                 <button class="tab-btn active" onclick="openTab('description')">Description</button>
+                <button class="tab-btn" onclick="openTab('origin')">Origin</button>
+                <button class="tab-btn" onclick="openTab('heating')">Heating Instructions</button>
             </div>
             
             <div id="description" class="tab-content active">
                 <h3>Product Details</h3>
-                <p>Our Flaky Bread is crafted using traditional French techniques with a modern twist. The dough undergoes a slow 24-hour fermentation process to develop complex flavors, then is carefully layered with premium butter through a series of precise folds. The result is a bread with hundreds of delicate, paper-thin layers that create an unforgettable texture.</p>
-                <p>Perfect for breakfast with jam, as a side with soups and salads, or simply enjoyed on its own. Reheats beautifully - just warm in the oven for 5 minutes at 350°F to restore the crisp exterior.</p>
+                <p>Our Korean Cream Cheese Garlic Bread starts with soft, pillowy milk bread that's cut into wedges but kept connected at the base. Each piece is generously filled with our sweet cream cheese mixture, then dipped in a luxurious garlic butter sauce made with real garlic, butter, and a touch of condensed milk for sweetness.</p>
+                <p>The bread is then baked until the exterior becomes slightly crisp while the inside remains soft and gooey. Finished with a sprinkle of parsley, these addictive treats offer the perfect balance of sweet cream cheese and savory garlic flavors.</p>
+            </div>
+            
+            <div id="origin" class="tab-content">
+                <h3>The Korean Garlic Bread Phenomenon</h3>
+                <p>Korean Cream Cheese Garlic Bread became a viral sensation in South Korea before spreading worldwide. Originating from small bakeries in Seoul, this innovative take on garlic bread combines Western and Korean baking techniques.</p>
+                <p>What sets it apart is the sweet cream cheese filling that contrasts beautifully with the garlic butter coating. The bread's unique flower-like shape isn't just for looks - it creates more surface area for the delicious garlic butter to coat.</p>
+            </div>
+            
+            <div id="heating" class="tab-content">
+                <h3>Heating Instructions</h3>
+                <p>For the best experience, we recommend enjoying our Korean Cream Cheese Garlic Bread warm. Here's how to heat it perfectly:</p>
+                <ul>
+                    <li><strong>Oven:</strong> Preheat to 350°F (180°C). Place bread on baking sheet and heat for 5-7 minutes until warm and slightly crispy.</li>
+                    <li><strong>Air Fryer:</strong> Heat at 320°F (160°C) for 3-4 minutes.</li>
+                    <li><strong>Microwave:</strong> Heat for 15-20 seconds (note: this will soften the crust).</li>
+                    <li><strong>From Refrigerated:</strong> Add 1-2 minutes to heating time.</li>
+                </ul>
+                <p>For food safety, consume within 2 hours of heating if left at room temperature.</p>
             </div>
         </div>
         
@@ -290,35 +153,35 @@
             <h2 class="section-title">You May Also Like</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <img src="/api/placeholder/300/200" alt="Wheat Bread" class="product-img">
+                    <img src="img/ensaymada.png" alt="Premium Ensaymada" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Wheat Bread</h3>
-                        <p class="product-price">$4.99</p>
-                        <a href="wheat-bread.html" class="btn">View Product</a>
+                        <h3 class="product-title">Premium Ensaymada</h3>
+                        <p class="product-price">₱220</p>
+                        <a href="ensaymada.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="/api/placeholder/300/200" alt="Sweet Pastry" class="product-img">
+                    <img src="img/bread-roll.png" alt="Bread Roll" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Sweet Pastry</h3>
-                        <p class="product-price">$3.99</p>
-                        <a href="sweet-pastry.html" class="btn">View Product</a>
+                        <h3 class="product-title">Bread Roll</h3>
+                        <p class="product-price">₱240-₱260</p>
+                        <a href="bread-roll.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="/api/placeholder/300/200" alt="Filled Bread" class="product-img">
+                    <img src="img/cinnamon-roll.png" alt="Cinnamon Roll" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Filled Bread</h3>
-                        <p class="product-price">$6.99</p>
-                        <a href="filled-bread.html" class="btn">View Product</a>
+                        <h3 class="product-title">Cinnamon Rolls</h3>
+                        <p class="product-price">₱400</p>
+                        <a href="cinnamon-roll.html" class="btn">View Product</a>
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="/api/placeholder/300/200" alt="Croissant" class="product-img">
+                    <img src="img/garlic-knots.jpg" alt="Garlic Knots" class="product-img">
                     <div class="product-info">
-                        <h3 class="product-title">Croissant</h3>
-                        <p class="product-price">$3.49</p>
-                        <a href="croissant.html" class="btn">View Product</a>
+                        <h3 class="product-title">Garlic Knots</h3>
+                        <p class="product-price">₱180</p>
+                        <a href="garlic-knots.html" class="btn">View Product</a>
                     </div>
                 </div>
             </div>
@@ -335,7 +198,7 @@
                 <div class="footer-col">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sweet-treats-website.html">Home</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="faq.html">FAQs</a></li>
                         <li><a href="about.html">About Us</a></li>
@@ -357,19 +220,14 @@
     </footer>
 
     <script>
-        // Product image gallery functionality
         function changeImage(thumbnail, newImageSrc) {
-            // Update main image
             document.getElementById('mainImage').src = newImageSrc;
-            
-            // Update active thumbnail
             document.querySelectorAll('.product-thumbnail').forEach(img => {
                 img.classList.remove('active');
             });
             thumbnail.classList.add('active');
         }
         
-        // Quantity selector functionality
         function increaseQuantity() {
             const quantityInput = document.getElementById('quantity');
             let currentValue = parseInt(quantityInput.value);
@@ -386,51 +244,99 @@
             }
         }
         
-        // Tab functionality
         function openTab(tabName) {
-            // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
-            // Deactivate all tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Activate selected tab
             document.getElementById(tabName).classList.add('active');
             event.currentTarget.classList.add('active');
         }
         
-        // Add to cart functionality
         function addToCart() {
+            const garlicLevel = document.getElementById('garlic-level').value;
+            const spiceLevel = document.getElementById('spice-level').value;
+            let price = 300;
+            let customizationNote = '';
+            
+            if (garlicLevel === 'extra') {
+                price += 20;
+                customizationNote += 'Extra Garlic, ';
+            }
+            
+            if (spiceLevel === 'medium') {
+                price += 15;
+                customizationNote += 'Medium Spice, ';
+            } else if (spiceLevel === 'spicy') {
+                price += 30;
+                customizationNote += 'Spicy, ';
+            }
+            
+            if (customizationNote.endsWith(', ')) {
+                customizationNote = customizationNote.slice(0, -2);
+            }
+            
             const product = {
-                name: 'Flaky Bread',
-                price: 5.49,
+                name: 'Korean Cream Cheese Garlic Bread',
+                price: price,
                 quantity: parseInt(document.getElementById('quantity').value),
-                image: '/api/placeholder/300/200'
+                garlic: garlicLevel,
+                spice: spiceLevel,
+                customization: customizationNote || 'Standard',
+                image: 'img/korean-garlic-bread.jpg'
             };
             
-            // Get existing cart or create new one
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             
-            // Check if product already in cart
-            const existingItem = cart.find(item => item.name === product.name);
+            const existingItem = cart.find(item => 
+                item.name === product.name && 
+                item.garlic === product.garlic && 
+                item.spice === product.spice
+            );
+            
             if (existingItem) {
                 existingItem.quantity += product.quantity;
             } else {
                 cart.push(product);
             }
             
-            // Save to localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
             
-            // Show confirmation
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
+            alert(`${product.quantity} ${product.name} (${product.customization}) added to cart! Total: ₱${price * product.quantity}`);
             
-            // In a real implementation, you might update a cart counter in the header
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+        });
     </script>
+	
+	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">
+	  <div class="cart-popup">
+		<button class="close-cart" id="closeCartPopup">&times;</button>
+		<h3>Your Cart</h3>
+		<ul id="popupCartItems"></ul>
+		<div class="cart-popup-total">
+		  Total: ₱<span id="popupCartTotal">0.00</span>
+		</div>
+		<div class="cart-popup-notes">
+		  <label for="cartNotes">Personal Notes:</label>
+		  <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
+		</div>
+		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
+	  </div>
+	</div>
 </body>
 </html>
