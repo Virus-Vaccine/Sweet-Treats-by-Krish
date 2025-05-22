@@ -85,7 +85,18 @@
                         <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
                         <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
                     </div>
-                    
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="banana-cake-variant">Banana Cake m:</label>
+                        <select id="banana-cake-variant" class="form-control" onchange="updatePrice()">
+                            <option value="walnut">Walnut - ₱230</option>
+                            <option value="almond">Almond - ₱220</option>
+                            <option value="choco-chip">Choco Chip - ₱220</option>
+                            <option value="classic">Classic - ₱220</option>
+                            <option value="nutty">Nutty - ₱250</option>
+                        </select>
+                    </div>
+
                     <button type="button" class="add-to-cart-btn" onclick="addToCart()">
                         <span>Add to Cart</span>
                         <span>🛒</span>
@@ -194,61 +205,97 @@
     </footer>
 
     <script>
-        function changeImage(thumbnail, newImageSrc) {
-            document.getElementById('mainImage').src = newImageSrc;
-            document.querySelectorAll('.product-thumbnail').forEach(img => {
-                img.classList.remove('active');
-            });
-            thumbnail.classList.add('active');
+document.addEventListener('DOMContentLoaded', function() {
+    function changeImage(thumbnail, newImageSrc) {
+        document.getElementById('mainImage').src = newImageSrc;
+        document.querySelectorAll('.product-thumbnail').forEach(img => {
+            img.classList.remove('active');
+        });
+        thumbnail.classList.add('active');
+    }
+    function increaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue < 10) {
+            quantityInput.value = currentValue + 1;
         }
-        
-        function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 10) {
-                quantityInput.value = currentValue + 1;
-            }
+    }
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
         }
-        
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
+    }
+    function openTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    function updatePrice() {
+        const variant = document.getElementById('banana-cake-variant').value;
+        const priceElement = document.querySelector('.product-price');
+        if (variant === 'walnut') {
+            priceElement.textContent = '₱230';
+        } else if (variant === 'nutty') {
+            priceElement.textContent = '₱250';
+        } else {
+            priceElement.textContent = '₱220';
         }
-        
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+    }
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const variant = document.getElementById('banana-cake-variant').value;
+        let price = 220;
+        let name = 'Banana Cake - Classic';
+        if (variant === 'walnut') {
+            price = 230;
+            name = 'Banana Cake - Walnut';
+        } else if (variant === 'almond') {
+            price = 220;
+            name = 'Banana Cake - Almond';
+        } else if (variant === 'choco-chip') {
+            price = 220;
+            name = 'Banana Cake - Choco Chip';
+        } else if (variant === 'classic') {
+            price = 220;
+            name = 'Banana Cake - Classic';
+        } else if (variant === 'nutty') {
+            price = 250;
+            name = 'Banana Cake - Nutty';
         }
-        
-        function addToCart() {
-			const product = {
-				id: 'banana-cake',  
-				name: 'Banana Cake',
-				price: 250,
-				quantity: parseInt(document.getElementById('quantity').value),
-				image: 'img/banana-cake.png',
-				description: 'Moist banana cake with cream cheese frosting'
-			};
-			
-			// Use the CartService from cart.js
-			if (window.CartService) {
-				window.CartService.addToCart(product);
-			} else {
-				// Fallback to trigger an event that cart.js can listen for
-				document.dispatchEvent(new CustomEvent('addToCart', { 
-					detail: { item: product } 
-				}));
-			}
-		}
+        if (isNaN(quantity) || quantity < 1) {
+            alert('Please select a valid quantity.');
+            return;
+        }
+        if (!window.SweetTreatsCart) {
+            alert('Cart system not ready. Please try again in a moment.');
+            return;
+        }
+        const result = window.SweetTreatsCart.addItem(
+            name,
+            price,
+            quantity,
+            'img/banana-cake.png'
+        );
+        if (result.success) {
+            alert(`${quantity} ${name}(s) added to cart!`);
+        } else {
+            alert(result.message || 'Failed to add item to cart');
+        }
+    }
+    window.changeImage = changeImage;
+    window.increaseQuantity = increaseQuantity;
+    window.decreaseQuantity = decreaseQuantity;
+    window.openTab = openTab;
+    window.updatePrice = updatePrice;
+    window.addToCart = addToCart;
+});
     </script>
 	
 	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">

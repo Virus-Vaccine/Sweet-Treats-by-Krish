@@ -88,8 +88,8 @@
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="size">Size:</label>
                         <select id="size" class="form-control" onchange="updatePrice()">
-                            <option value="small">Small (12 cookies) - ₱140</option>
-                            <option value="large">Large (24 cookies) - ₱280</option>
+                            <option value="4pcs">4 pcs - ₱140</option>
+                            <option value="8pcs">8 pcs - ₱280</option>
                         </select>
                     </div>
                     
@@ -207,78 +207,80 @@
         function updatePrice() {
             const sizeSelect = document.getElementById('size');
             const priceElement = document.querySelector('.product-price');
-            if (sizeSelect.value === 'small') {
+            if (sizeSelect.value === '4pcs') {
                 priceElement.textContent = '₱140';
             } else {
                 priceElement.textContent = '₱280';
             }
         }
         
-		function changeImage(thumbnail, newImageSrc) {
-            document.getElementById('mainImage').src = newImageSrc;
-            document.querySelectorAll('.product-thumbnail').forEach(img => {
-                img.classList.remove('active');
-            });
-            thumbnail.classList.add('active');
+document.addEventListener('DOMContentLoaded', function() {
+    function changeImage(thumbnail, newImageSrc) {
+        document.getElementById('mainImage').src = newImageSrc;
+        document.querySelectorAll('.product-thumbnail').forEach(img => {
+            img.classList.remove('active');
+        });
+        thumbnail.classList.add('active');
+    }
+    function increaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue < 10) {
+            quantityInput.value = currentValue + 1;
         }
-        
-        function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 10) {
-                quantityInput.value = currentValue + 1;
-            }
+    }
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
         }
-        
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
+    }
+    function openTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const size = document.getElementById('size').value;
+        let price = 140;
+        let name = 'Cookies (4 pcs)';
+        if (size === '8pcs') {
+            price = 280;
+            name = 'Cookies (8 pcs)';
         }
-        
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+        if (isNaN(quantity) || quantity < 1) {
+            alert('Please select a valid quantity.');
+            return;
         }
-        
-        function addToCart() {
-            const size = document.getElementById('size').value;
-            const doneness = document.getElementById('doneness').value;
-            const price = size === 'small' ? 140 : 280;
-            const product = {
-                name: `Chocolate Chip Cookies (${size === 'small' ? 'Small' : 'Large'}, ${doneness})`,
-                price: price,
-                quantity: parseInt(document.getElementById('quantity').value),
-                size: size,
-                doneness: doneness,
-                image: 'img/choco-chip.png'
-            };
-            
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === product.name);
-            if (existingItem) {
-                existingItem.quantity += product.quantity;
-            } else {
-                cart.push(product);
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
-            
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            }
+        if (!window.SweetTreatsCart) {
+            alert('Cart system not ready. Please try again in a moment.');
+            return;
         }
+        const result = window.SweetTreatsCart.addItem(
+            name,
+            price,
+            quantity,
+            'img/cookies.png'
+        );
+        if (result.success) {
+            alert(`${quantity} ${name} added to cart!`);
+        } else {
+            alert(result.message || 'Failed to add item to cart');
+        }
+    }
+    window.changeImage = changeImage;
+    window.increaseQuantity = increaseQuantity;
+    window.decreaseQuantity = decreaseQuantity;
+    window.openTab = openTab;
+    window.addToCart = addToCart;
+});
     </script>
 	
 	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">

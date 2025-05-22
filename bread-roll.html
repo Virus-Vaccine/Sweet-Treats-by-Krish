@@ -6,7 +6,7 @@
     <title>Bread Roll - Sweet Treats by Krish</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
-    <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
+    <script src="js/cart.js"></script><script src="js/app.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -84,7 +84,16 @@
                         <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
                         <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
                     </div>
-                    
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="bread-roll-variant">Bread Roll Options:</label>
+                        <select id="bread-roll-variant" class="form-control" onchange="updatePrice()">
+                            <option value="cheese">Cheese Rolls 5pcs - ₱240</option>
+                            <option value="almond">Almond Rolls 5pcs - ₱260</option>
+                            <option value="porkfloss">Pork Floss 5pcs - ₱240</option>
+                        </select>
+                    </div>
+
                     <button type="button" class="add-to-cart-btn" onclick="addToCart()">
                         <span>Add to Cart</span>
                         <span>🛒</span>
@@ -188,6 +197,7 @@
     </footer>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
         function changeImage(thumbnail, newImageSrc) {
             document.getElementById('mainImage').src = newImageSrc;
             document.querySelectorAll('.product-thumbnail').forEach(img => {
@@ -195,7 +205,6 @@
             });
             thumbnail.classList.add('active');
         }
-        
         function increaseQuantity() {
             const quantityInput = document.getElementById('quantity');
             let currentValue = parseInt(quantityInput.value);
@@ -203,7 +212,6 @@
                 quantityInput.value = currentValue + 1;
             }
         }
-        
         function decreaseQuantity() {
             const quantityInput = document.getElementById('quantity');
             let currentValue = parseInt(quantityInput.value);
@@ -211,7 +219,6 @@
                 quantityInput.value = currentValue - 1;
             }
         }
-        
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -222,48 +229,69 @@
             document.getElementById(tabName).classList.add('active');
             event.currentTarget.classList.add('active');
         }
-        
-        function addToCart() {
-            const product = {
-                name: 'Bread Roll',
-                price: 260,
-                quantity: parseInt(document.getElementById('quantity').value),
-                image: 'img/bread-roll.png'
-            }; 
-            
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === product.name);
-            if (existingItem) {
-                existingItem.quantity += product.quantity;
+        function updatePrice() {
+            const variant = document.getElementById('bread-roll-variant').value;
+            const priceElement = document.querySelector('.product-price');
+            if (variant === 'almond') {
+                priceElement.textContent = '₱260';
             } else {
-                cart.push(product);
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
-            
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
+                priceElement.textContent = '₱240';
             }
         }
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const variant = document.getElementById('bread-roll-variant').value;
+            let price = 240;
+            let name = 'Cheese Rolls 5pcs';
+            if (variant === 'almond') {
+                price = 260;
+                name = 'Almond Rolls 5pcs';
+            } else if (variant === 'porkfloss') {
+                price = 240;
+                name = 'Pork Floss 5pcs';
+            }
+            if (isNaN(quantity) || quantity < 1) {
+                alert('Please select a valid quantity.');
+                return;
+            }
+            if (!window.SweetTreatsCart) {
+                alert('Cart system not ready. Please try again in a moment.');
+                return;
+            }
+            const result = window.SweetTreatsCart.addItem(
+                name,
+                price,
+                quantity,
+                'img/bread-roll.png'
+            );
+            if (result.success) {
+                alert(`${quantity} ${name} added to cart!`);
+            } else {
+                alert(result.message || 'Failed to add item to cart');
+            }
+        }
+        window.changeImage = changeImage;
+        window.increaseQuantity = increaseQuantity;
+        window.decreaseQuantity = decreaseQuantity;
+        window.openTab = openTab;
+        window.updatePrice = updatePrice;
+        window.addToCart = addToCart;
+    });
     </script>
-	
-	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">
-	  <div class="cart-popup">
-		<button class="close-cart" id="closeCartPopup">&times;</button>
-		<h3>Your Cart</h3>
-		<ul id="popupCartItems"></ul>
-		<div class="cart-popup-total">
-		  Total: ₱<span id="popupCartTotal">0.00</span>
-		</div>
-		<div class="cart-popup-notes">
-		  <label for="cartNotes">Personal Notes:</label>
-		  <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
-		</div>
-		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
-	  </div>
-	</div>
+    <div id="cartPopup" class="cart-popup-overlay" style="display:none;">
+      <div class="cart-popup">
+        <button class="close-cart" id="closeCartPopup">&times;</button>
+        <h3>Your Cart</h3>
+        <ul id="popupCartItems"></ul>
+        <div class="cart-popup-total">
+          Total: ₱<span id="popupCartTotal">0.00</span>
+        </div>
+        <div class="cart-popup-notes">
+          <label for="cartNotes">Personal Notes:</label>
+          <textarea id="cartNotes" rows="3" placeholder="Add any notes or instructions here..."></textarea>
+        </div>
+        <button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
+      </div>
+    </div>
 </body>
 </html>

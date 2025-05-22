@@ -40,9 +40,6 @@
                 <img src="img/ensaymada.png" alt="Premium Ensaymada" class="product-main-image" id="mainImage">
                 <div class="product-thumbnails">
                     <img src="img/ensaymada.png" alt="Ensaymada - Image 1" class="product-thumbnail active" onclick="changeImage(this, 'img/ensaymada.png')">
-                    <img src="img/ensaymada-alt1.jpg" alt="Ensaymada - Image 2" class="product-thumbnail" onclick="changeImage(this, 'img/ensaymada-alt1.jpg')">
-                    <img src="img/ensaymada-alt2.jpg" alt="Ensaymada - Image 3" class="product-thumbnail" onclick="changeImage(this, 'img/ensaymada-alt2.jpg')">
-                    <img src="img/ensaymada-alt3.jpg" alt="Ensaymada - Image 4" class="product-thumbnail" onclick="changeImage(this, 'img/ensaymada-alt3.jpg')">
                 </div>
             </div>
             
@@ -215,87 +212,66 @@
     </footer>
 
     <script>
-        function changeImage(thumbnail, newImageSrc) {
-            document.getElementById('mainImage').src = newImageSrc;
-            document.querySelectorAll('.product-thumbnail').forEach(img => {
-                img.classList.remove('active');
-            });
-            thumbnail.classList.add('active');
-        }
-        
-        function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 10) {
-                quantityInput.value = currentValue + 1;
-            }
-        }
-        
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        }
-        
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-        
-        function addToCart() {
-            const cheeseAmount = document.getElementById('cheese-amount').value;
-            const sugarLevel = document.getElementById('sugar-level').value;
-            let price = 220;
-            
-            if (cheeseAmount === 'extra') {
-                price += 20;
-            }
-            
-            const product = {
-                name: 'Premium Ensaymada',
-                price: price,
-                quantity: parseInt(document.getElementById('quantity').value),
-                cheese: cheeseAmount,
-                sugar: sugarLevel,
-                image: 'img/ensaymada.png'
-            };
-            
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            const existingItem = cart.find(item => item.name === product.name && item.cheese === product.cheese && item.sugar === product.sugar);
-            if (existingItem) {
-                existingItem.quantity += product.quantity;
-            } else {
-                cart.push(product);
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
-            
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = totalItems;
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    function changeImage(thumbnail, newImageSrc) {
+        document.getElementById('mainImage').src = newImageSrc;
+        document.querySelectorAll('.product-thumbnail').forEach(img => {
+            img.classList.remove('active');
         });
+        thumbnail.classList.add('active');
+    }
+    function increaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue < 10) {
+            quantityInput.value = currentValue + 1;
+        }
+    }
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
+    function openTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        if (isNaN(quantity) || quantity < 1) {
+            alert('Please select a valid quantity.');
+            return;
+        }
+        if (!window.SweetTreatsCart) {
+            alert('Cart system not ready. Please try again in a moment.');
+            return;
+        }
+        const result = window.SweetTreatsCart.addItem(
+            'Premium Ensaymada',
+            220,
+            quantity,
+            'img/ensaymada.png'
+        );
+        if (result.success) {
+            alert(`${quantity} Premium Ensaymada(s) added to cart!`);
+        } else {
+            alert(result.message || 'Failed to add item to cart');
+        }
+    }
+    window.changeImage = changeImage;
+    window.increaseQuantity = increaseQuantity;
+    window.decreaseQuantity = decreaseQuantity;
+    window.openTab = openTab;
+    window.addToCart = addToCart;
+});
     </script>
 	
 	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">

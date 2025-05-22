@@ -198,14 +198,14 @@
     </footer>
 
     <script>
-		function changeImage(thumbnail, newImageSrc) {
+    document.addEventListener('DOMContentLoaded', function() {
+        function changeImage(thumbnail, newImageSrc) {
             document.getElementById('mainImage').src = newImageSrc;
             document.querySelectorAll('.product-thumbnail').forEach(img => {
                 img.classList.remove('active');
             });
             thumbnail.classList.add('active');
         }
-        
         function increaseQuantity() {
             const quantityInput = document.getElementById('quantity');
             let currentValue = parseInt(quantityInput.value);
@@ -213,7 +213,6 @@
                 quantityInput.value = currentValue + 1;
             }
         }
-        
         function decreaseQuantity() {
             const quantityInput = document.getElementById('quantity');
             let currentValue = parseInt(quantityInput.value);
@@ -221,7 +220,6 @@
                 quantityInput.value = currentValue - 1;
             }
         }
-        
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -232,34 +230,35 @@
             document.getElementById(tabName).classList.add('active');
             event.currentTarget.classList.add('active');
         }
-        
         function addToCart() {
-            const addIns = document.getElementById('add-ins').value;
-            const product = {
-                name: 'Brownies' + (addIns !== 'none' ? ` with ${addIns}` : ''),
-                price: 200,
-                quantity: parseInt(document.getElementById('quantity').value),
-                addIns: addIns,
-                image: 'img/brownies.png'
-            };
-            
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === product.name);
-            if (existingItem) {
-                existingItem.quantity += product.quantity;
-            } else {
-                cart.push(product);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            if (isNaN(quantity) || quantity < 1) {
+                alert('Please select a valid quantity.');
+                return;
             }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
-            
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
+            if (!window.SweetTreatsCart) {
+                alert('Cart system not ready. Please try again in a moment.');
+                return;
+            }
+            const result = window.SweetTreatsCart.addItem(
+                'Brownies', 
+                200, 
+                quantity, 
+                'img/brownies.png'
+            );
+            if (result.success) {
+                alert(`${quantity} Brownies(s) added to cart!`);
+            } else {
+                alert(result.message || 'Failed to add item to cart');
             }
         }
+        // Expose functions to global scope for inline onclick handlers
+        window.changeImage = changeImage;
+        window.increaseQuantity = increaseQuantity;
+        window.decreaseQuantity = decreaseQuantity;
+        window.openTab = openTab;
+        window.addToCart = addToCart;
+    });
     </script>
 	
 	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">

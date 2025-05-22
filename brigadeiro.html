@@ -193,70 +193,70 @@
     </footer>
 
     <script>
-        function addToCart() {
-            const decoration = document.getElementById('decoration').value;
-            const product = {
-                name: 'Brigadeiro Cake',
-                price: 160,
-                quantity: parseInt(document.getElementById('quantity').value),
-                decoration: decoration,
-                image: 'img/brigadeiro.png'
-            };
-            thumbnail.classList.add('active');
+document.addEventListener('DOMContentLoaded', function() {
+    function changeImage(thumbnail, newImageSrc) {
+        const mainImage = document.getElementById('mainImage');
+        if (mainImage) {
+            mainImage.src = newImageSrc;
         }
-        
-        function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 10) {
-                quantityInput.value = currentValue + 1;
-            }
+        const thumbnails = document.querySelectorAll('.product-thumbnail');
+        thumbnails.forEach(thumb => {
+            thumb.classList.remove('active');
+        });
+        thumbnail.classList.add('active');
+    }
+    function increaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue < 10) {
+            quantityInput.value = currentValue + 1;
         }
-        
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
+    }
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
         }
-        
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+    }
+    function openTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        if (isNaN(quantity) || quantity < 1) {
+            alert('Please select a valid quantity.');
+            return;
         }
-        
-        function addToCart() {
-            const product = {
-                name: 'Banana Cake',
-                price: 250,
-                quantity: parseInt(document.getElementById('quantity').value),
-                image: 'img/banana-cake.png'
-            };
-            
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === product.name);
-            if (existingItem) {
-                existingItem.quantity += product.quantity;
-            } else {
-                cart.push(product);
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${product.quantity} ${product.name}(s) added to cart!`);
-            
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            }
+        if (!window.SweetTreatsCart) {
+            alert('Cart system not ready. Please try again in a moment.');
+            return;
         }
+        const result = window.SweetTreatsCart.addItem(
+            'Brigadeiro',
+            180,
+            quantity,
+            'img/brigadeiro.png'
+        );
+        if (result.success) {
+            alert(`${quantity} Brigadeiro(s) added to cart!`);
+        } else {
+            alert(result.message || 'Failed to add item to cart');
+        }
+    }
+    window.changeImage = changeImage;
+    window.increaseQuantity = increaseQuantity;
+    window.decreaseQuantity = decreaseQuantity;
+    window.openTab = openTab;
+    window.addToCart = addToCart;
+});
     </script>
 	
 	<div id="cartPopup" class="cart-popup-overlay" style="display:none;">

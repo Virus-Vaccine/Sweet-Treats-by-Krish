@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/sweet-treats-css.css">
     <script src="js/cart.js" defer></script><script src="js/app.js" defer></script>
+    <style>
+    .hero {
+        background: url('img/hero.jpg') center center/cover no-repeat;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -125,5 +134,14 @@
 		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
 	  </div>
 	</div>
+
+    <script>
+    // Ensure cart count and popup work on this page
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
+            window.SweetTreatsCart.updateCartDisplay();
+        }
+    });
+    </script>
 </body>
 </html>

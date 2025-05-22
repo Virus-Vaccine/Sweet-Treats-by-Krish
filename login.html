@@ -185,5 +185,124 @@
 		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
 	  </div>
 	</div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
+            window.SweetTreatsCart.updateCartDisplay();
+        }
+
+        // Tab switching
+        document.querySelectorAll('.auth-tab, .switch-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-tab');
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                document.querySelector('.auth-tab[data-tab="' + target + '"]').classList.add('active');
+                document.getElementById(target + 'Form').classList.add('active');
+                clearAuthAlerts();
+            });
+        });
+
+        // Login form feedback
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearAuthAlerts();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            if (!email || !password) {
+                showAuthAlert('Please fill in all fields.', 'danger');
+                return;
+            }
+            if (email === 'user@example.com' && password === 'password123') {
+                showAuthAlert('Login successful! Redirecting...', 'success');
+                showNotification('Logging in...');
+                setTimeout(() => window.location.href = 'sweet-treats-website.html', 1500);
+            } else {
+                showAuthAlert('Invalid email or password.', 'danger');
+            }
+        });
+
+        // Register form feedback
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearAuthAlerts();
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirmPassword').value;
+            if (!name || !email || !password || !confirm) {
+                showAuthAlert('Please fill in all fields.', 'danger');
+                return;
+            }
+            if (password.length < 6) {
+                showAuthAlert('Password must be at least 6 characters.', 'danger');
+                return;
+            }
+            if (password !== confirm) {
+                showAuthAlert('Passwords do not match.', 'danger');
+                return;
+            }
+            showAuthAlert('Registration successful! You can now log in.', 'success');
+            showNotification('Registration successful!');
+            setTimeout(() => {
+                document.querySelector('.auth-tab[data-tab="login"]').click();
+            }, 1200);
+        });
+
+        // Forgot password modal
+        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+        });
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.getElementById('forgotPasswordModal').style.display = 'none';
+            });
+        });
+        document.getElementById('forgotForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value.trim();
+            if (!email) return;
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+            showAuthAlert('If this email exists, a reset link has been sent.', 'success');
+        });
+
+        function showAuthAlert(msg, type) {
+            const c = document.getElementById('authAlerts');
+            c.innerHTML = `<div class="alert alert-${type}" style="margin-bottom:20px;">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}" style="margin-right:8px;"></i>
+                ${msg}
+            </div>`;
+        }
+        function clearAuthAlerts() {
+            document.getElementById('authAlerts').innerHTML = '';
+        }
+
+        // Notification function
+        function showNotification(message) {
+            let notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.position = 'fixed';
+            notif.style.top = '30px';
+            notif.style.right = '30px';
+            notif.style.background = '#28a745';
+            notif.style.color = '#fff';
+            notif.style.padding = '16px 28px';
+            notif.style.borderRadius = '8px';
+            notif.style.fontSize = '1rem';
+            notif.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
+            notif.style.zIndex = 3000;
+            notif.style.opacity = '0.95';
+            notif.style.transition = 'opacity 0.3s';
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 400);
+            }, 1800);
+        }
+    });
+    </script>
 </body>
 </html>

@@ -185,5 +185,15 @@
 		<button id="popupCheckoutBtn" class="checkout-btn">Checkout</button>
 	  </div>
 	</div>
+
+    <script>
+    // Ensure cart count and popup work on this page
+    document.addEventListener('DOMContentLoaded', function() {
+        // If cart.js is loaded with defer, this will run after cart is initialized
+        if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
+            window.SweetTreatsCart.updateCartDisplay();
+        }
+    });
+    </script>
 </body>
 </html>
