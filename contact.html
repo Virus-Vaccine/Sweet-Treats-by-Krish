@@ -193,6 +193,38 @@
         if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
             window.SweetTreatsCart.updateCartDisplay();
         }
+
+        // Show notification on successful contact form submit
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Your message has been sent successfully!');
+                contactForm.reset();
+            });
+        }
+
+        function showNotification(message) {
+            let notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.position = 'fixed';
+            notif.style.top = '30px';
+            notif.style.right = '30px';
+            notif.style.background = '#28a745';
+            notif.style.color = '#fff';
+            notif.style.padding = '16px 28px';
+            notif.style.borderRadius = '8px';
+            notif.style.fontSize = '1rem';
+            notif.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
+            notif.style.zIndex = 3000;
+            notif.style.opacity = '0.95';
+            notif.style.transition = 'opacity 0.3s';
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 400);
+            }, 1800);
+        }
     });
     </script>
 </body>

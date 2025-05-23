@@ -149,7 +149,7 @@
             <h2 class="section-title">Still Have Questions?</h2>
             <div class="form-container">
                 <p style="margin-bottom: 20px;">If you couldn't find the answer to your question, please fill out the form below and we'll get back to you as soon as possible.</p>
-                <form action="#" method="post">
+                <form id="faqInquiryForm" action="#" method="post">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" class="form-control" required>
@@ -216,6 +216,38 @@
     document.addEventListener('DOMContentLoaded', function() {
         if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
             window.SweetTreatsCart.updateCartDisplay();
+        }
+
+        // Show notification on successful FAQ inquiry form submit
+        const faqForm = document.getElementById('faqInquiryForm');
+        if (faqForm) {
+            faqForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Your question has been sent successfully!');
+                faqForm.reset();
+            });
+        }
+
+        function showNotification(message) {
+            let notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.position = 'fixed';
+            notif.style.top = '30px';
+            notif.style.right = '30px';
+            notif.style.background = '#28a745';
+            notif.style.color = '#fff';
+            notif.style.padding = '16px 28px';
+            notif.style.borderRadius = '8px';
+            notif.style.fontSize = '1rem';
+            notif.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
+            notif.style.zIndex = 3000;
+            notif.style.opacity = '0.95';
+            notif.style.transition = 'opacity 0.3s';
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 400);
+            }, 1800);
         }
     });
     </script>

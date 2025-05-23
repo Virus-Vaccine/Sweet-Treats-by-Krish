@@ -170,7 +170,7 @@
             <h2 class="section-title">Request a Product</h2>
             <div class="form-container">
                 <p style="margin-bottom: 20px;">Can't find what you're looking for? Request a custom product and we'll try our best to create it for you!</p>
-                <form action="#" method="post">
+                <form id="requestForm" action="#" method="post">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" class="form-control" required>
@@ -247,6 +247,38 @@
     document.addEventListener('DOMContentLoaded', function() {
         if (window.SweetTreatsCart && typeof window.SweetTreatsCart.updateCartDisplay === 'function') {
             window.SweetTreatsCart.updateCartDisplay();
+        }
+
+        // Show notification on successful request form submit
+        const requestForm = document.getElementById('requestForm');
+        if (requestForm) {
+            requestForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Your request has been sent successfully!');
+                requestForm.reset();
+            });
+        }
+
+        function showNotification(message) {
+            let notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.position = 'fixed';
+            notif.style.top = '30px';
+            notif.style.right = '30px';
+            notif.style.background = '#28a745';
+            notif.style.color = '#fff';
+            notif.style.padding = '16px 28px';
+            notif.style.borderRadius = '8px';
+            notif.style.fontSize = '1rem';
+            notif.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
+            notif.style.zIndex = 3000;
+            notif.style.opacity = '0.95';
+            notif.style.transition = 'opacity 0.3s';
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 400);
+            }, 1800);
         }
     });
     </script>
